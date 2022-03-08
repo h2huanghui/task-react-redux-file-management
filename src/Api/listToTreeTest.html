@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [
+        { key: 1, name: '部门1', parentId: -1 },
+        { key: 2, name: '部门2', parentId: 1 },
+        { key: 3, name: '部门3', parentId: 1 },
+        { key: 4, name: '部门4', parentId: 3 },
+        { key: 5, name: '部门5', parentId: 4 },
+      ];
+
+      const createTree = (list = []) => {
+        let tree = [];
+        let map = {};
+        console.log('tree==', tree);
+        console.log('map===', map);
+
+        list.forEach((item) => {
+          const newItem = { ...item, children: [] };
+
+          map[item.key] = newItem;
+          console.log('map===', map);
+          //判断是否是根节点
+          if (item.parentId === -1) {
+            tree.push(newItem);
+          } else {
+            map[newItem.parentId].children.push(newItem);
+          }
+        });
+        return tree;
+      };
+
+      const result = createTree(arr);
+      console.log('result===', result);
+    </script>
+  </body>
+</html>
